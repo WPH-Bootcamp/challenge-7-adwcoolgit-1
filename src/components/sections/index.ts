@@ -1,1 +1,10 @@
-export {};
+export { ClientLogosSection } from "./ClientLogosSection";
+export { ContactSection } from "./ContactSection";
+export { FaqSection } from "./FaqSection";
+export { HeroSection } from "./HeroSection";
+export { IndustriesSection } from "./IndustriesSection";
+export { PortfolioSection } from "./PortfolioSection";
+export { ProcessSection } from "./ProcessSection";
+export { ServicesSection } from "./ServicesSection";
+export { TestimonialsSection } from "./TestimonialsSection";
+export { ValuesSection } from "./ValuesSection";
