@@ -4,6 +4,7 @@ import {
   headerCallToAction,
   primaryNavigation,
 } from "../../data/navigation";
+import { MobileNavigation } from "./MobileNavigation";
 
 export function SiteHeader() {
   return (
@@ -11,7 +12,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-300 items-center justify-between px-page desktop:h-21 desktop:px-0">
         <a
           aria-label={`${companyIdentity.name} home`}
-          className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          className="flex min-h-11 items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           href="#hero"
         >
           <BrandLogo compact />
@@ -32,17 +33,16 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        <Button
-          className="hidden min-w-50 desktop:inline-flex"
-          href={headerCallToAction.href}
-          size="sm"
-        >
-          {headerCallToAction.label}
-        </Button>
-
-        <span className="text-xs font-bold desktop:hidden" aria-hidden="true">
-          Menu
-        </span>
+        <div className="hidden desktop:block">
+          <Button
+            className="min-w-50"
+            href={headerCallToAction.href}
+            size="sm"
+          >
+            {headerCallToAction.label}
+          </Button>
+        </div>
+        <MobileNavigation />
       </div>
     </header>
   );

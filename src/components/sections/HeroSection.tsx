@@ -6,12 +6,12 @@ export function HeroSection() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="mx-auto grid max-w-300 items-center gap-12 px-page pb-20 pt-12 desktop:min-h-145 desktop:grid-cols-2 desktop:gap-5 desktop:px-0 desktop:pb-24 desktop:pt-10"
+      className="mx-auto grid max-w-300 items-center gap-10 px-page pb-20 pt-10 sm:px-8 desktop:min-h-145 desktop:grid-cols-2 desktop:gap-5 desktop:px-0 desktop:pb-24 desktop:pt-10"
       id={sectionIds.hero}
     >
       <div className="relative z-10">
         <h1
-          className="max-w-150 text-4xl font-bold leading-tight tracking-[-0.035em] desktop:text-display-3xl"
+          className="max-w-150 text-[2rem] font-bold leading-[1.18] tracking-[-0.035em] sm:text-4xl desktop:text-display-3xl"
           id="hero-heading"
         >
           <span className="desktop:whitespace-nowrap">
@@ -19,11 +19,11 @@ export function HeroSection() {
           </span>
           <span className="block text-primary">Smarter Growth</span>
         </h1>
-        <p className="mt-5 max-w-145 text-base font-medium leading-7 text-ink desktop:text-lg">
+        <p className="mt-5 max-w-145 text-sm font-medium leading-7 text-ink sm:text-base desktop:text-lg">
           {companyIdentity.pageDescription}
         </p>
         <Button
-          className="mt-10 min-w-50"
+          className="mt-8 w-full sm:w-auto sm:min-w-50 desktop:mt-10"
           href={companyActions.primary.href}
           size="sm"
         >

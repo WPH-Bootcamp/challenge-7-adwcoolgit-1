@@ -14,7 +14,7 @@ import {
 
 export function HomePage() {
   return (
-    <div className="min-h-screen overflow-hidden bg-canvas text-ink">
+    <div className="min-h-screen w-full min-w-0 overflow-x-clip bg-canvas text-ink">
       <SiteHeader />
       <main>
         <HeroSection />

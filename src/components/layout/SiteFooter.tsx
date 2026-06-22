@@ -16,11 +16,11 @@ const socialLinks = [
 export function SiteFooter() {
   return (
     <footer
-      className="mx-auto mb-8 max-w-300 rounded-xl border border-border bg-surface px-8 py-10 desktop:mb-20 desktop:px-10 desktop:py-12"
+      className="mx-page mb-6 max-w-300 rounded-xl border border-border bg-surface px-5 py-7 sm:mx-8 sm:px-8 sm:py-10 desktop:mx-auto desktop:mb-20 desktop:px-10 desktop:py-12"
       id={sectionIds.footer}
     >
-      <div className="flex items-start justify-between gap-8">
-        <p className="max-w-64 text-2xl font-bold leading-tight tracking-[-0.02em] desktop:text-3xl">
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between sm:gap-8">
+        <p className="max-w-64 text-xl font-bold leading-tight tracking-[-0.02em] sm:text-2xl desktop:text-3xl">
           {companyIdentity.footerStatement}
         </p>
         <a
@@ -32,7 +32,7 @@ export function SiteFooter() {
         </a>
       </div>
 
-      <div className="my-10 h-px bg-border-subtle" />
+      <div className="my-7 h-px bg-border-subtle desktop:my-10" />
 
       <div className="flex flex-col gap-8 desktop:flex-row desktop:items-center desktop:justify-between">
         <nav aria-label="Footer">

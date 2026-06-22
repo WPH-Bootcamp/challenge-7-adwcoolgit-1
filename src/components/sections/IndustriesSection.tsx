@@ -9,7 +9,7 @@ export function IndustriesSection() {
   return (
     <section
       aria-labelledby="industries-heading"
-      className="mx-auto max-w-300 scroll-mt-header-desktop px-page pb-40 desktop:px-0"
+      className="mx-auto max-w-300 scroll-mt-header-mobile px-page pb-28 sm:px-8 desktop:scroll-mt-header-desktop desktop:px-0 desktop:pb-40"
       id={sectionIds.industries}
     >
       <SectionHeading
@@ -18,12 +18,12 @@ export function IndustriesSection() {
         subtitle={sectionCopy.industries.subtitle}
         title={sectionCopy.industries.title}
       />
-      <div className="mt-14 grid gap-10 desktop:grid-cols-[260px_1fr]">
-        <ul className="space-y-5">
+      <div className="mt-10 grid gap-6 desktop:mt-14 desktop:grid-cols-[260px_1fr] desktop:gap-10">
+        <ul className="flex gap-4 overflow-hidden desktop:block desktop:space-y-5">
           {industries.map((industry, index) => (
             <li
               className={[
-                "border-l-4 pl-3 text-lg font-bold",
+                "shrink-0 border-l-4 pl-2 text-sm font-bold desktop:pl-3 desktop:text-lg",
                 index === 0
                   ? "border-primary text-ink"
                   : "border-border text-muted/60",
@@ -35,12 +35,12 @@ export function IndustriesSection() {
           ))}
         </ul>
         <div>
-          <p className="max-w-205 text-base font-medium leading-7">
+          <p className="max-w-205 text-sm font-medium leading-6 desktop:text-base desktop:leading-7">
             {selectedIndustry.description}
           </p>
           <img
             alt={selectedIndustry.image.alt}
-            className="mt-6 aspect-[2.35/1] w-full rounded-xl object-cover object-[center_55%]"
+            className="mt-5 aspect-[1.45/1] w-full rounded-xl object-cover object-[center_55%] desktop:mt-6 desktop:aspect-[2.35/1]"
             height={selectedIndustry.image.height}
             loading="lazy"
             src={selectedIndustry.image.src}

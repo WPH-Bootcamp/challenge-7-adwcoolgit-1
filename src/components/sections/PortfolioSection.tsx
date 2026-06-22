@@ -7,7 +7,7 @@ export function PortfolioSection() {
   return (
     <section
       aria-labelledby="portfolio-heading"
-      className="mx-auto max-w-300 scroll-mt-header-desktop px-page pb-40 desktop:px-0"
+      className="mx-auto max-w-300 scroll-mt-header-mobile px-page pb-28 sm:px-8 desktop:scroll-mt-header-desktop desktop:px-0 desktop:pb-40"
       id={sectionIds.portfolio}
     >
       <SectionHeading
@@ -15,7 +15,7 @@ export function PortfolioSection() {
         subtitle={sectionCopy.portfolio.subtitle}
         title={sectionCopy.portfolio.title}
       />
-      <ul className="mt-14 grid gap-6 desktop:grid-cols-3">
+      <ul className="mt-10 grid gap-8 sm:grid-cols-2 desktop:mt-14 desktop:grid-cols-3 desktop:gap-6">
         {portfolioItems.map((item) => (
           <li key={item.id}>
             <article>

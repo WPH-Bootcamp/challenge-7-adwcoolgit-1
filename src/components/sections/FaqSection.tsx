@@ -8,22 +8,22 @@ export function FaqSection() {
   return (
     <section
       aria-labelledby="faq-heading"
-      className="mx-auto max-w-300 scroll-mt-header-desktop px-page pb-40 desktop:px-0"
+      className="mx-auto max-w-300 scroll-mt-header-mobile px-page pb-28 sm:px-8 desktop:scroll-mt-header-desktop desktop:px-0 desktop:pb-40"
       id={sectionIds.faq}
     >
-      <div className="flex items-end justify-between gap-8">
+      <div className="grid gap-4 desktop:flex desktop:items-end desktop:justify-between desktop:gap-8">
         <h2
-          className="max-w-96 text-4xl font-bold leading-tight tracking-[-0.03em] desktop:text-5xl"
+          className="max-w-96 text-3xl font-bold leading-tight tracking-[-0.03em] sm:text-4xl desktop:text-5xl"
           id="faq-heading"
         >
           {sectionCopy.faq.title}
         </h2>
-        <p className="max-w-52 pb-2 text-base leading-7 text-muted">
+        <p className="max-w-70 text-sm leading-6 text-muted desktop:max-w-52 desktop:pb-2 desktop:text-base desktop:leading-7">
           {sectionCopy.faq.subtitle}
         </p>
       </div>
-      <div className="mt-12 h-px bg-border" />
-      <div className="mt-8 grid gap-16 desktop:grid-cols-[1fr_330px]">
+      <div className="mt-8 h-px bg-border desktop:mt-12" />
+      <div className="mt-8 grid gap-10 desktop:grid-cols-[1fr_330px] desktop:gap-16">
         <div>
           {faqs.map((faq, index) => (
             <article
@@ -31,7 +31,7 @@ export function FaqSection() {
               key={faq.id}
             >
               <div className="flex items-center justify-between gap-8">
-                <h3 className="text-lg font-bold">{faq.question}</h3>
+                <h3 className="text-sm font-bold sm:text-lg">{faq.question}</h3>
                 <span className="text-2xl font-medium">
                   {index === 0 ? "−" : "+"}
                 </span>

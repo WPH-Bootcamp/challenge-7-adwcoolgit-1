@@ -9,24 +9,24 @@ export function TestimonialsSection() {
   return (
     <section
       aria-labelledby="testimonials-heading"
-      className="overflow-hidden pb-40"
+      className="overflow-hidden pb-28 desktop:pb-40"
       id={sectionIds.testimonials}
     >
-      <div className="mx-auto max-w-300 px-page desktop:px-0">
+      <div className="mx-auto max-w-300 px-page sm:px-8 desktop:px-0">
         <SectionHeading
           headingId="testimonials-heading"
           subtitle={sectionCopy.testimonials.subtitle}
           title={sectionCopy.testimonials.title}
         />
       </div>
-      <div className="mx-auto mt-14 flex max-w-360 items-stretch justify-center gap-5">
+      <div className="mx-auto mt-10 flex max-w-360 items-stretch justify-center gap-5 desktop:mt-14">
         {testimonials.map((testimonial, index) => (
           <article
             className={[
-              "relative min-h-76 shrink-0 rounded-xl border bg-surface px-8 pb-8 pt-13 text-center",
+              "relative min-h-76 shrink-0 rounded-xl border bg-surface px-5 pb-8 pt-13 text-center sm:px-8",
               index === 1
-                ? "w-[600px] border-primary/45 opacity-100"
-                : "w-[400px] border-border opacity-20",
+                ? "w-[calc(100vw-2.5rem)] max-w-150 border-primary/45 opacity-100"
+                : "hidden w-100 border-border opacity-20 desktop:block",
             ].join(" ")}
             key={testimonial.id}
           >
@@ -47,7 +47,7 @@ export function TestimonialsSection() {
                 <img alt="" className="size-5" key={starIndex} src={starIcon} />
               ))}
             </div>
-            <blockquote className="mx-auto mt-5 max-w-130 text-base font-semibold leading-7">
+            <blockquote className="mx-auto mt-5 max-w-130 text-sm font-semibold leading-6 sm:text-base sm:leading-7">
               “{testimonial.quote}”
             </blockquote>
             <p className="mt-6 font-bold">{testimonial.authorName}</p>

@@ -7,7 +7,7 @@ export function ContactSection() {
   return (
     <section
       aria-labelledby="contact-heading"
-      className="mx-auto max-w-190 scroll-mt-header-desktop px-page pb-40"
+      className="mx-auto max-w-190 scroll-mt-header-mobile px-page pb-28 sm:px-8 desktop:scroll-mt-header-desktop desktop:pb-40"
       id={sectionIds.contact}
     >
       <SectionHeading
@@ -15,7 +15,7 @@ export function ContactSection() {
         subtitle={sectionCopy.contact.subtitle}
         title={sectionCopy.contact.title}
       />
-      <form className="mt-14 space-y-6" noValidate>
+      <form className="mt-10 space-y-5 desktop:mt-14 desktop:space-y-6" noValidate>
         <FormField
           id="contact-name"
           inputProps={{ name: "name", placeholder: "Enter your name" }}
