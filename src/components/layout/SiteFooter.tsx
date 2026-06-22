@@ -5,6 +5,7 @@ import xIcon from "../../assets/icons/social/x.svg";
 import { companyIdentity } from "../../data/company";
 import { primaryNavigation, sectionIds } from "../../data/navigation";
 import { BrandLogo } from "../ui";
+import { handleSectionLink } from "../../lib";
 
 const socialLinks = [
   { id: "facebook", label: "Facebook", href: "https://facebook.com", icon: facebookIcon },
@@ -27,6 +28,7 @@ export function SiteFooter() {
           aria-label={`${companyIdentity.name} home`}
           className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           href="#hero"
+          onClick={handleSectionLink}
         >
           <BrandLogo />
         </a>
@@ -42,6 +44,7 @@ export function SiteFooter() {
                 <a
                   className="rounded-sm text-xs font-semibold hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   href={item.href}
+                  onClick={handleSectionLink}
                 >
                   {item.label}
                 </a>

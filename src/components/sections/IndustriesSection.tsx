@@ -2,9 +2,12 @@ import { sectionCopy } from "../../data/company";
 import { sectionIds } from "../../data/navigation";
 import { industries } from "../../data/sections";
 import { SectionHeading } from "../ui";
+import { useState } from "react";
 
 export function IndustriesSection() {
-  const selectedIndustry = industries[0];
+  const [selectedId, setSelectedId] = useState<string>(industries[0].id);
+  const selectedIndustry =
+    industries.find((industry) => industry.id === selectedId) ?? industries[0];
 
   return (
     <section
@@ -19,22 +22,37 @@ export function IndustriesSection() {
         title={sectionCopy.industries.title}
       />
       <div className="mt-10 grid gap-6 desktop:mt-14 desktop:grid-cols-[260px_1fr] desktop:gap-10">
-        <ul className="flex gap-4 overflow-hidden desktop:block desktop:space-y-5">
-          {industries.map((industry, index) => (
-            <li
-              className={[
-                "shrink-0 border-l-4 pl-2 text-sm font-bold desktop:pl-3 desktop:text-lg",
-                index === 0
-                  ? "border-primary text-ink"
-                  : "border-border text-muted/60",
-              ].join(" ")}
-              key={industry.id}
-            >
-              {industry.name}
+        <ul
+          aria-label="Industries"
+          className="flex gap-4 overflow-hidden desktop:block desktop:space-y-5"
+          role="tablist"
+        >
+          {industries.map((industry) => (
+            <li key={industry.id} role="presentation">
+              <button
+                aria-selected={industry.id === selectedId}
+                aria-controls="industry-panel"
+                className={[
+                  "min-h-11 shrink-0 border-l-4 pl-2 text-left text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary desktop:pl-3 desktop:text-lg",
+                  industry.id === selectedId
+                    ? "border-primary text-ink"
+                    : "border-border text-muted/60 hover:text-ink",
+                ].join(" ")}
+                id={`industry-tab-${industry.id}`}
+                onClick={() => setSelectedId(industry.id)}
+                role="tab"
+                type="button"
+              >
+                {industry.name}
+              </button>
             </li>
           ))}
         </ul>
-        <div>
+        <div
+          aria-labelledby={`industry-tab-${selectedIndustry.id}`}
+          id="industry-panel"
+          role="tabpanel"
+        >
           <p className="max-w-205 text-sm font-medium leading-6 desktop:text-base desktop:leading-7">
             {selectedIndustry.description}
           </p>

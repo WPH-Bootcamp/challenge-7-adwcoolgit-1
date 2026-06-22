@@ -1,1 +1,1 @@
-export {};
+export { useContactForm } from "./useContactForm";

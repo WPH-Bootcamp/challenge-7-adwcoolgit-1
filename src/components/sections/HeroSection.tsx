@@ -1,6 +1,7 @@
 import { companyActions, companyIdentity, heroMedia } from "../../data/company";
 import { sectionIds } from "../../data/navigation";
 import { Button } from "../ui";
+import { handleSectionLink } from "../../lib";
 
 export function HeroSection() {
   return (
@@ -25,6 +26,7 @@ export function HeroSection() {
         <Button
           className="mt-8 w-full sm:w-auto sm:min-w-50 desktop:mt-10"
           href={companyActions.primary.href}
+          onClick={handleSectionLink}
           size="sm"
         >
           {companyActions.primary.label}

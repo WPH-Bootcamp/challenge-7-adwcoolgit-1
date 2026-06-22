@@ -5,6 +5,7 @@ import {
   primaryNavigation,
 } from "../../data/navigation";
 import { MobileNavigation } from "./MobileNavigation";
+import { handleSectionLink } from "../../lib";
 
 export function SiteHeader() {
   return (
@@ -14,6 +15,7 @@ export function SiteHeader() {
           aria-label={`${companyIdentity.name} home`}
           className="flex min-h-11 items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           href="#hero"
+          onClick={handleSectionLink}
         >
           <BrandLogo compact />
         </a>
@@ -25,6 +27,7 @@ export function SiteHeader() {
                 <a
                   className="rounded-sm text-xs font-semibold text-ink transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                   href={item.href}
+                  onClick={handleSectionLink}
                 >
                   {item.label}
                 </a>
@@ -37,6 +40,7 @@ export function SiteHeader() {
           <Button
             className="min-w-50"
             href={headerCallToAction.href}
+            onClick={handleSectionLink}
             size="sm"
           >
             {headerCallToAction.label}

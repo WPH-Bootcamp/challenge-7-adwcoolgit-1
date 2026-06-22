@@ -3,8 +3,12 @@ import { companyActions, sectionCopy } from "../../data/company";
 import { sectionIds } from "../../data/navigation";
 import { faqs } from "../../data/sections";
 import { Button } from "../ui";
+import { handleSectionLink } from "../../lib";
+import { useState } from "react";
 
 export function FaqSection() {
+  const [openFaqId, setOpenFaqId] = useState<string>(faqs[0].id);
+
   return (
     <section
       aria-labelledby="faq-heading"
@@ -25,26 +29,43 @@ export function FaqSection() {
       <div className="mt-8 h-px bg-border desktop:mt-12" />
       <div className="mt-8 grid gap-10 desktop:grid-cols-[1fr_330px] desktop:gap-16">
         <div>
-          {faqs.map((faq, index) => (
+          {faqs.map((faq) => {
+            const isOpen = faq.id === openFaqId;
+            return (
             <article
               className="border-b border-border py-5 first:pt-0"
               key={faq.id}
             >
-              <div className="flex items-center justify-between gap-8">
-                <h3 className="text-sm font-bold sm:text-lg">{faq.question}</h3>
-                <span className="text-2xl font-medium">
-                  {index === 0 ? "−" : "+"}
-                </span>
-              </div>
-              {index === 0 ? (
-                <p className="mt-4 text-base leading-7 text-muted">
+              <h3>
+                <button
+                  aria-controls={`faq-panel-${faq.id}`}
+                  aria-expanded={isOpen}
+                  className="flex w-full items-center justify-between gap-8 rounded-sm text-left text-sm font-bold transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary sm:text-lg"
+                  onClick={() =>
+                    setOpenFaqId((current) =>
+                      current === faq.id ? "" : faq.id,
+                    )
+                  }
+                  type="button"
+                >
+                  {faq.question}
+                  <span className="text-2xl font-medium">
+                    {isOpen ? "−" : "+"}
+                  </span>
+                </button>
+              </h3>
+              {isOpen ? (
+                <p
+                  className="mt-4 text-base leading-7 text-muted"
+                  id={`faq-panel-${faq.id}`}
+                >
                   {faq.answer}
                 </p>
               ) : null}
             </article>
-          ))}
+          )})}
         </div>
-        <aside className="rounded-xl bg-[#d94f30] p-6 text-white">
+        <div className="rounded-xl bg-[#d94f30] p-6 text-white">
           <h3 className="text-3xl font-bold leading-tight">
             {sectionCopy.faq.consultationTitle}
           </h3>
@@ -63,12 +84,13 @@ export function FaqSection() {
             className="mt-4"
             fullWidth
             href={companyActions.consultation.href}
+            onClick={handleSectionLink}
             size="sm"
             variant="secondary"
           >
             {companyActions.consultation.label}
           </Button>
-        </aside>
+        </div>
       </div>
     </section>
   );
