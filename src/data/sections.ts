@@ -15,7 +15,6 @@ import webDevelopmentIcon from "../assets/images/services/web-development.png";
 import emilyAvatar from "../assets/images/testimonials/emily-chen.png";
 import johnAvatar from "../assets/images/testimonials/john-lee.png";
 import sarahAvatar from "../assets/images/testimonials/sarah-tan.png";
-import client01 from "../assets/icons/logos/client-01.svg";
 import client02 from "../assets/icons/logos/client-02.svg";
 import client03 from "../assets/icons/logos/client-03.svg";
 import client04 from "../assets/icons/logos/client-04.svg";
@@ -46,27 +45,26 @@ const image = (
 ): MediaAsset => ({ src, alt, width, height, loading });
 
 export const clientLogos = [
-  { id: "upwork", name: "Upwork", image: image(client01, "Upwork", 133, 48) },
-  { id: "zoom", name: "Zoom", image: image(client02, "Zoom", 114, 48) },
+  { id: "upwork", name: "Upwork", image: image(client02, "Upwork", 114, 48) },
+  { id: "zoom", name: "Zoom", image: image(client03, "Zoom", 98, 48) },
   {
     id: "postman",
     name: "Postman",
-    image: image(client03, "Postman", 98, 48),
+    image: image(client04, "Postman", 152, 48),
   },
   {
     id: "databricks",
     name: "Databricks",
-    image: image(client04, "Databricks", 152, 48),
+    image: image(client05, "Databricks", 178, 48),
   },
-  { id: "airbnb", name: "Airbnb", image: image(client05, "Airbnb", 178, 48) },
+  { id: "airbnb", name: "Airbnb", image: image(client06, "Airbnb", 128, 48) },
   {
     id: "dropbox",
     name: "Dropbox",
-    image: image(client06, "Dropbox", 128, 48),
+    image: image(client07, "Dropbox", 163, 48),
   },
-  { id: "paypal", name: "PayPal", image: image(client07, "PayPal", 163, 48) },
-  { id: "slack", name: "Slack", image: image(client08, "Slack", 143, 48) },
-  { id: "stripe", name: "Stripe", image: image(client09, "Stripe", 111, 48) },
+  { id: "paypal", name: "PayPal", image: image(client08, "PayPal", 143, 48) },
+  { id: "slack", name: "Slack", image: image(client09, "Slack", 111, 48) },
 ] as const satisfies readonly ClientLogo[];
 
 export const values = [
