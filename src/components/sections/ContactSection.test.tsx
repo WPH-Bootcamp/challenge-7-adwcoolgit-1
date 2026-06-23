@@ -27,7 +27,7 @@ describe("ContactSection", () => {
     expect(await screen.findByRole("status")).toHaveTextContent(
       "Your message is ready",
     );
-    expect(screen.getByRole("status")).toHaveFocus();
+    expect(screen.getByRole("dialog")).toHaveFocus();
 
     await user.click(screen.getByRole("button", { name: "Send another message" }));
     expect(screen.getByLabelText(/Name/)).toHaveValue("");

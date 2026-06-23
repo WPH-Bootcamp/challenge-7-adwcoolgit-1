@@ -22,6 +22,15 @@ export function ContactSection() {
   } = useContactForm();
   const formRef = useRef<HTMLFormElement>(null);
 
+  const handleReset = () => {
+    reset();
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() =>
+        document.getElementById("contact-name")?.focus(),
+      ),
+    );
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (status === "submitting") return;
@@ -41,7 +50,13 @@ export function ContactSection() {
   return (
     <section
       aria-labelledby="contact-heading"
-      className="mx-auto h-[946px] w-[calc(100%-32px)] max-w-[361px] scroll-mt-header-mobile px-0 pt-[74px] desktop:h-[956px] desktop:max-w-[720px] desktop:scroll-mt-header-desktop desktop:py-20"
+      className={[
+        "mx-auto w-[calc(100%-32px)] max-w-[361px] scroll-mt-header-mobile px-0 pt-[74px]",
+        "desktop:max-w-[720px] desktop:scroll-mt-header-desktop desktop:py-20",
+        status === "invalid"
+          ? "min-h-[1040px] desktop:min-h-[1050px]"
+          : "h-[946px] desktop:h-[956px]",
+      ].join(" ")}
       id={sectionIds.contact}
     >
       <SectionHeading
@@ -52,10 +67,11 @@ export function ContactSection() {
       />
       {status === "success" ? (
         <div className="mt-10 desktop:mt-14">
-          <SuccessDialog onReset={reset} />
+          <SuccessDialog onReset={handleReset} />
         </div>
       ) : (
         <form
+          aria-busy={status === "submitting"}
           className="mt-6 space-y-5 desktop:mt-12"
           noValidate
           onSubmit={handleSubmit}
@@ -131,13 +147,24 @@ export function ContactSection() {
             ) : null}
           </fieldset>
           <Button
+            aria-busy={status === "submitting"}
             className="!mt-5 h-11 text-sm leading-7 desktop:!mt-10 desktop:h-12 desktop:text-base desktop:leading-[30px]"
             disabled={status === "submitting"}
             fullWidth
             size="sm"
             type="submit"
           >
-            {status === "submitting" ? "Sending…" : "Send"}
+            {status === "submitting" ? (
+              <>
+                <span
+                  aria-hidden="true"
+                  className="size-4 animate-spin rounded-full border-2 border-white/45 border-t-white motion-reduce:animate-none"
+                />
+                Sending…
+              </>
+            ) : (
+              "Send"
+            )}
           </Button>
         </form>
       )}

@@ -14,6 +14,18 @@ export function TestimonialsSection() {
     setActiveIndex(Math.min(Math.max(index, 0), testimonials.length - 1));
   };
 
+  const selectAndFocus = (index: number) => {
+    const nextIndex = (index + testimonials.length) % testimonials.length;
+    selectIndex(nextIndex);
+    requestAnimationFrame(() =>
+      document
+        .querySelector<HTMLElement>(
+          `[data-testimonial-control="${nextIndex}"]`,
+        )
+        ?.focus(),
+    );
+  };
+
   return (
     <section
       aria-labelledby="testimonials-heading"
@@ -99,6 +111,26 @@ export function TestimonialsSection() {
               ].join(" ")}
               key={testimonial.id}
               onClick={() => selectIndex(index)}
+              onKeyDown={(event) => {
+                if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+                  event.preventDefault();
+                  selectAndFocus(index - 1);
+                }
+                if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+                  event.preventDefault();
+                  selectAndFocus(index + 1);
+                }
+                if (event.key === "Home") {
+                  event.preventDefault();
+                  selectAndFocus(0);
+                }
+                if (event.key === "End") {
+                  event.preventDefault();
+                  selectAndFocus(testimonials.length - 1);
+                }
+              }}
+              data-testimonial-control={index}
+              tabIndex={index === activeIndex ? 0 : -1}
               type="button"
             />
           ))}

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import checkIcon from "../../assets/icons/ui/check.svg";
 import { Button } from "./Button";
 
 interface SuccessDialogProps {
@@ -6,27 +7,63 @@ interface SuccessDialogProps {
 }
 
 export function SuccessDialog({ onReset }: SuccessDialogProps) {
-  const statusRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    statusRef.current?.focus();
+    dialogRef.current?.focus();
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Tab") return;
+      const button = dialogRef.current?.querySelector<HTMLButtonElement>(
+        "button",
+      );
+      if (!button) return;
+      event.preventDefault();
+      button.focus();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   return (
     <div
-      aria-live="polite"
-      className="rounded-xl border border-primary/30 bg-surface px-6 py-12 text-center shadow-card"
-      ref={statusRef}
-      role="status"
-      tabIndex={-1}
+      className="fixed inset-0 z-[70] flex items-center justify-center bg-ink/45 p-4 backdrop-blur-[2px]"
+      data-ui="success-overlay"
     >
-      <p className="text-3xl font-bold text-ink">Your message is ready</p>
-      <p className="mx-auto mt-3 max-w-120 text-sm leading-6 text-muted">
-        Thanks for sharing your project. We’ll be in touch soon.
-      </p>
-      <Button className="mt-7" onClick={onReset} type="button">
-        Send another message
-      </Button>
+      <div
+        aria-describedby="success-description"
+        aria-labelledby="success-title"
+        aria-modal="true"
+        className="w-full max-w-[361px] rounded-2xl bg-canvas px-6 py-8 text-center shadow-[0_24px_80px_rgb(10_13_18/28%)] desktop:max-w-[520px] desktop:px-12 desktop:py-12"
+        ref={dialogRef}
+        role="dialog"
+        tabIndex={-1}
+      >
+        <div className="mx-auto flex size-20 items-center justify-center rounded-full bg-primary shadow-[inset_0_1px_0_rgb(255_255_255/30%)]">
+          <img alt="" className="size-9" src={checkIcon} />
+        </div>
+        <div aria-live="polite" role="status">
+          <p
+            className="mt-6 text-[28px] font-bold leading-[38px] tracking-[-0.02em] text-ink desktop:text-4xl desktop:leading-[44px]"
+            id="success-title"
+          >
+            Your message is ready
+          </p>
+          <p
+            className="mx-auto mt-3 max-w-[420px] text-sm font-medium leading-7 text-muted desktop:text-base desktop:leading-[30px]"
+            id="success-description"
+          >
+            Thanks for sharing your project. We’ll be in touch soon.
+          </p>
+        </div>
+        <Button
+          className="mt-7"
+          fullWidth
+          onClick={onReset}
+          type="button"
+        >
+          Send another message
+        </Button>
+      </div>
     </div>
   );
 }

@@ -9,6 +9,32 @@ export function IndustriesSection() {
   const selectedIndustry =
     industries.find((industry) => industry.id === selectedId) ?? industries[0];
 
+  const selectByIndex = (index: number) => {
+    const next = industries[index];
+    setSelectedId(next.id);
+    requestAnimationFrame(() =>
+      document.getElementById(`industry-tab-${next.id}`)?.focus(),
+    );
+  };
+
+  const handleTabKeyDown = (
+    event: React.KeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) => {
+    const keyTargets: Record<string, number> = {
+      ArrowDown: (index + 1) % industries.length,
+      ArrowRight: (index + 1) % industries.length,
+      ArrowUp: (index - 1 + industries.length) % industries.length,
+      ArrowLeft: (index - 1 + industries.length) % industries.length,
+      Home: 0,
+      End: industries.length - 1,
+    };
+    const target = keyTargets[event.key];
+    if (target === undefined) return;
+    event.preventDefault();
+    selectByIndex(target);
+  };
+
   return (
     <section
       aria-labelledby="industries-heading"
@@ -27,7 +53,7 @@ export function IndustriesSection() {
           className="block h-[114px] space-y-3 overflow-hidden desktop:h-auto desktop:space-y-2"
           role="tablist"
         >
-          {industries.map((industry) => (
+          {industries.map((industry, index) => (
             <li key={industry.id} role="presentation">
               <button
                 aria-selected={industry.id === selectedId}
@@ -40,7 +66,9 @@ export function IndustriesSection() {
                 ].join(" ")}
                 id={`industry-tab-${industry.id}`}
                 onClick={() => setSelectedId(industry.id)}
+                onKeyDown={(event) => handleTabKeyDown(event, index)}
                 role="tab"
+                tabIndex={industry.id === selectedId ? 0 : -1}
                 type="button"
               >
                 {industry.name}

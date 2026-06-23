@@ -34,7 +34,7 @@ test("mobile menu, form errors, and success state have no axe violations", async
   await page.goto("/");
   await page.getByRole("button", { name: "Open navigation" }).click();
   await expectNoAxeViolations(page);
-  await page.getByRole("button", { name: "Open navigation" }).click();
+  await page.getByRole("button", { name: "Close navigation" }).click();
 
   await page.getByRole("button", { name: "Send" }).click();
   await expectNoAxeViolations(page);
@@ -44,6 +44,18 @@ test("mobile menu, form errors, and success state have no axe violations", async
   await page.getByLabel(/Message/).fill("Build a product");
   await page.getByRole("button", { name: "Send" }).click();
   await expect(page.getByRole("status")).toBeVisible();
+  await expectNoAxeViolations(page);
+});
+
+test("selected tabs, expanded FAQ, and testimonial states have no violations", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.getByRole("tab", { name: "E-Commerce" }).click();
+  await page
+    .getByRole("button", { name: "How much does a project cost?" })
+    .click();
+  await page.getByRole("button", { name: "Show testimonial 3" }).click();
   await expectNoAxeViolations(page);
 });
 
@@ -81,7 +93,7 @@ test("Chromium accessibility tree exposes screen-reader landmarks and status", a
   await page.getByLabel(/Email/).fill("ada@example.com");
   await page.getByLabel(/Message/).fill("Build a product");
   await page.getByRole("button", { name: "Send" }).click();
-  await expect(page.getByRole("status")).toBeFocused();
+  await expect(page.getByRole("dialog")).toBeFocused();
 
   const successTree = await session.send("Accessibility.getFullAXTree");
   const successNodes = successTree.nodes as Array<{

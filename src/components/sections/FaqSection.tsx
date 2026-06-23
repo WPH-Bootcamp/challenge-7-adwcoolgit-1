@@ -35,7 +35,7 @@ export function FaqSection() {
             <article
               className={[
                 "relative border-0 p-0",
-                index === 0
+                isOpen
                   ? "h-40 desktop:h-[142px]"
                   : index === 1
                     ? "h-[120px] desktop:h-[92px]"
@@ -58,7 +58,10 @@ export function FaqSection() {
                   type="button"
                 >
                   {faq.question}
-                  <span className="text-2xl font-medium">
+                  <span
+                    aria-hidden="true"
+                    className="text-2xl font-medium transition-colors duration-200 motion-reduce:transition-none"
+                  >
                     {isOpen ? "−" : "+"}
                   </span>
                 </button>
@@ -76,7 +79,7 @@ export function FaqSection() {
                   aria-hidden="true"
                   className={[
                     "absolute left-0 block h-px w-full bg-border",
-                    index === 0
+                    isOpen
                       ? "top-[132px] desktop:top-[114px]"
                       : index === 1
                         ? "top-[92px] desktop:top-16"
