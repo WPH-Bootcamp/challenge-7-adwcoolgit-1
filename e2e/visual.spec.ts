@@ -1,52 +1,92 @@
+import path from "node:path";
 import { expect, test } from "@playwright/test";
+import { figmaManifest } from "../src/data/figma-manifest";
+import {
+  captureFullPage,
+  comparePngs,
+  inspectPng,
+  sha256File,
+} from "./helpers/visualComparison";
 
-const visualViewports = [
-  { name: "320", width: 320, height: 852 },
-  { name: "375", width: 375, height: 812 },
-  { name: "768", width: 768, height: 1024 },
-  { name: "1024", width: 1024, height: 768 },
-  { name: "1440", width: 1440, height: 1024 },
-] as const;
+const repositoryRoot = path.resolve(import.meta.dirname, "..");
 
-for (const viewport of visualViewports) {
-  test(`page matches the approved ${viewport.name}px visual baseline`, async ({
-    browserName,
-    page,
-  }) => {
-    test.skip(browserName !== "chromium", "Golden screenshots use Chromium.");
-    await page.setViewportSize(viewport);
-    await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.goto("/");
-    await page.waitForLoadState("networkidle");
-    await page.evaluate(async () => {
-      for (let y = 0; y < document.body.scrollHeight; y += 700) {
-        window.scrollTo(0, y);
-        await new Promise((resolve) => window.setTimeout(resolve, 40));
-      }
-      window.scrollTo(0, 0);
+for (const [mode, frame] of Object.entries(figmaManifest.frames)) {
+  test(`${mode} Figma reference is native-size and immutable`, async () => {
+    const referencePath = path.resolve(repositoryRoot, frame.referencePath);
+    const [metadata, sha256] = await Promise.all([
+      inspectPng(referencePath),
+      sha256File(referencePath),
+    ]);
+
+    expect(metadata).toEqual({
+      format: "png",
+      height: frame.height,
+      width: frame.width,
     });
-    await page.evaluate(async () => {
-      await document.fonts.ready;
-      await Promise.all(
-        Array.from(document.images, (image) =>
-          image.complete
-            ? Promise.resolve()
-            : new Promise<void>((resolve) => {
-                image.addEventListener("load", () => resolve(), { once: true });
-                image.addEventListener("error", () => resolve(), { once: true });
-                window.setTimeout(resolve, 5_000);
-              }),
-        ),
-      );
-    });
-
-    await expect(page).toHaveScreenshot(
-      `company-profile-${viewport.name}.png`,
-      {
-        fullPage: true,
-        animations: "disabled",
-        maxDiffPixelRatio: 0.02,
-      },
+    expect(sha256).toBe(frame.sha256);
+    expect(frame.referencePath).toMatch(
+      /^src\/assets\/reference\/figma-(desktop|mobile)-light\.png$/,
     );
   });
 }
+
+test("desktop page matches the native Figma reference", async ({
+  browserName,
+  page,
+}, testInfo) => {
+  test.skip(browserName !== "chromium", "Figma pixel oracle uses Chromium.");
+  test.setTimeout(60_000);
+  const frame = figmaManifest.frames.desktop;
+  const referencePath = path.resolve(repositoryRoot, frame.referencePath);
+
+  await page.setViewportSize({ width: frame.width, height: 1024 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+
+  const actual = await captureFullPage(page);
+  const comparison = await comparePngs({
+    actual,
+    artifactName: "desktop-figma",
+    outputDir: testInfo.outputPath("figma-comparison"),
+    referencePath,
+  });
+
+  await testInfo.attach("desktop-actual", {
+    body: actual,
+    contentType: "image/png",
+  });
+  await testInfo.attach("desktop-comparison", {
+    body: Buffer.from(JSON.stringify(comparison, null, 2)),
+    contentType: "application/json",
+  });
+
+  expect(comparison.actualWidth).toBe(frame.width);
+  expect(comparison.actualHeight).toBe(frame.height);
+  expect(comparison.diffPixelRatio).toBeLessThanOrEqual(0.02);
+});
+
+test("mobile page matches the native Figma reference", async ({
+  browserName,
+  page,
+}, testInfo) => {
+  test.skip(browserName !== "chromium", "Figma pixel oracle uses Chromium.");
+  test.setTimeout(60_000);
+  const frame = figmaManifest.frames.mobile;
+  const referencePath = path.resolve(repositoryRoot, frame.referencePath);
+
+  await page.setViewportSize({ width: frame.width, height: 852 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+
+  const actual = await captureFullPage(page);
+  const comparison = await comparePngs({
+    actual,
+    artifactName: "mobile-figma",
+    outputDir: testInfo.outputPath("figma-comparison"),
+    referencePath,
+  });
+
+  expect(comparison.actualWidth).toBe(frame.width);
+  expect(comparison.actualHeight).toBe(frame.height);
+  expect(comparison.diffPixelRatio).toBeLessThanOrEqual(0.02);
+});

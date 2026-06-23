@@ -6,27 +6,21 @@ export function ClientLogosSection() {
   return (
     <section
       aria-labelledby="client-logos-heading"
-      className="mx-auto max-w-300 scroll-mt-header-mobile px-page pb-24 sm:px-8 desktop:scroll-mt-header-desktop desktop:px-0 desktop:pb-30"
+      className="relative mx-auto h-36 max-w-none scroll-mt-header-mobile overflow-hidden p-0 desktop:h-[236px] desktop:scroll-mt-header-desktop"
       id={sectionIds.clients}
     >
       <h2
-        className="text-center text-sm font-bold sm:text-lg desktop:text-xl"
+        className="absolute top-10 h-[30px] w-full text-center text-base font-bold leading-[30px] desktop:static desktop:h-auto desktop:text-2xl desktop:leading-9"
         id="client-logos-heading"
       >
         {sectionCopy.clients.title}
       </h2>
-      <ul className="mt-10 grid grid-cols-3 items-center gap-5 desktop:mt-14 desktop:grid-cols-7 desktop:gap-9">
-        {clientLogos.slice(0, 7).map((client, index) => (
-          <li
-            className={[
-              "flex justify-center",
-              index > 2 ? "hidden desktop:flex" : "",
-            ].join(" ")}
-            key={client.id}
-          >
+      <ul className="absolute -left-[599px] top-[70px] flex items-center gap-12 py-10 desktop:left-1/2 desktop:top-[72px] desktop:-translate-x-1/2">
+        {clientLogos.map((client) => (
+          <li className="flex shrink-0 justify-center" key={client.id}>
             <img
               alt={client.image.alt}
-              className="h-7 max-w-full object-contain opacity-75 grayscale desktop:h-9 desktop:max-w-38"
+              className="h-[30px] max-w-none object-contain opacity-75 grayscale mix-blend-luminosity desktop:h-12"
               height={client.image.height}
               loading="eager"
               src={client.image.src}
@@ -35,6 +29,8 @@ export function ClientLogosSection() {
           </li>
         ))}
       </ul>
+      <div className="pointer-events-none absolute bottom-0 left-0 top-[70px] w-12 bg-gradient-to-r from-canvas via-canvas/90 to-transparent desktop:inset-y-0 desktop:w-[260px]" />
+      <div className="pointer-events-none absolute bottom-0 right-0 top-[70px] w-12 bg-gradient-to-l from-canvas via-canvas/90 to-transparent desktop:inset-y-0 desktop:w-[260px]" />
     </section>
   );
 }

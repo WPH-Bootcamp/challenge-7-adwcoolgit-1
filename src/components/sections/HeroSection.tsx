@@ -7,12 +7,15 @@ export function HeroSection() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="mx-auto grid max-w-300 items-center gap-10 px-page pb-20 pt-10 sm:px-8 desktop:min-h-145 desktop:grid-cols-2 desktop:gap-5 desktop:px-0 desktop:pb-24 desktop:pt-10"
+      className="relative mx-auto h-[745px] max-w-none p-0 desktop:block desktop:h-[747px]"
       id={sectionIds.hero}
     >
-      <div className="relative z-10">
+      <div
+        className="absolute left-4 top-[61px] z-10 w-[calc(100%-32px)] desktop:left-[calc(50%-580px)] desktop:top-[230px] desktop:w-[653px]"
+        data-ui="hero-copy"
+      >
         <h1
-          className="max-w-150 text-[2rem] font-bold leading-[1.18] tracking-[-0.035em] sm:text-4xl desktop:text-display-3xl"
+          className="max-w-none text-hero-mobile font-bold desktop:text-hero-desktop"
           id="hero-heading"
         >
           <span className="desktop:whitespace-nowrap">
@@ -20,11 +23,11 @@ export function HeroSection() {
           </span>
           <span className="block text-primary">Smarter Growth</span>
         </h1>
-        <p className="mt-5 max-w-145 text-sm font-medium leading-7 text-ink sm:text-base desktop:text-lg">
+        <p className="mt-2 max-w-none text-hero-body-mobile font-semibold text-ink desktop:text-hero-body-desktop">
           {companyIdentity.pageDescription}
         </p>
         <Button
-          className="mt-8 w-full sm:w-auto sm:min-w-50 desktop:mt-10"
+          className="mt-10 w-full desktop:h-12 desktop:w-[200px] desktop:text-base desktop:leading-[30px]"
           href={companyActions.primary.href}
           onClick={handleSectionLink}
           size="sm"
@@ -33,14 +36,17 @@ export function HeroSection() {
         </Button>
       </div>
 
-      <div className="relative flex items-center justify-center">
+      <div
+        className="absolute left-1/2 top-[344px] flex size-[391px] -translate-x-1/2 items-center justify-center desktop:left-[calc(50%-24px)] desktop:top-0 desktop:size-[747px] desktop:translate-x-0"
+        data-ui="hero-image"
+      >
         <div
           aria-hidden="true"
-          className="absolute inset-8 rounded-full bg-[radial-gradient(circle,rgba(255,98,62,0.12),rgba(255,255,255,0)_68%)]"
+          className="absolute inset-8 hidden rounded-full bg-[radial-gradient(circle,rgba(255,98,62,0.12),rgba(255,255,255,0)_68%)] desktop:block"
         />
         <img
           alt={heroMedia.alt}
-          className="relative z-10 aspect-square w-full max-w-145 object-contain [mask-image:radial-gradient(ellipse_74%_74%_at_center,black_60%,transparent_100%)]"
+          className="relative z-10 size-[391px] object-contain [mask-image:radial-gradient(ellipse_70%_70%_at_center,black_52%,transparent_90%)] desktop:size-[747px] desktop:[mask-image:radial-gradient(ellipse_74%_74%_at_center,black_60%,transparent_100%)]"
           decoding="sync"
           fetchPriority="high"
           height={heroMedia.height}

@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test";
 const viewports = [
   { width: 320, height: 852 },
   { width: 375, height: 812 },
+  { width: 393, height: 852 },
   { width: 480, height: 900 },
   { width: 768, height: 1024 },
   { width: 900, height: 900 },

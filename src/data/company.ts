@@ -14,6 +14,21 @@ export const heroMedia: MediaAsset = {
   alt: "A mobile product interface surrounded by technology symbols",
   width: 1024,
   height: 1024,
+  displayWidth: 747,
+  displayHeight: 747,
+  objectPosition: "50% 50%",
+  displayByMode: {
+    desktop: {
+      displayWidth: 747,
+      displayHeight: 747,
+      objectPosition: "50% 50%",
+    },
+    mobile: {
+      displayWidth: 391,
+      displayHeight: 391,
+      objectPosition: "50% 50%",
+    },
+  },
   loading: "eager",
 };
 

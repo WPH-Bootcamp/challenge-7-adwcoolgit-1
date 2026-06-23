@@ -9,23 +9,23 @@ import { handleSectionLink } from "../../lib";
 
 export function SiteHeader() {
   return (
-    <header className="relative z-20 bg-canvas">
-      <div className="mx-auto flex h-16 max-w-300 items-center justify-between px-page desktop:h-21 desktop:px-0">
+    <header className="relative z-20 bg-canvas desktop:absolute desktop:inset-x-0 desktop:top-0 desktop:bg-canvas/70 desktop:backdrop-blur-xl">
+      <div className="mx-auto flex h-16 w-[calc(100%-32px)] max-w-[361px] items-center justify-between desktop:h-21 desktop:w-full desktop:max-w-290">
         <a
           aria-label={`${companyIdentity.name} home`}
           className="flex min-h-11 items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           href="#hero"
           onClick={handleSectionLink}
         >
-          <BrandLogo compact />
+          <BrandLogo />
         </a>
 
         <nav aria-label="Primary" className="hidden desktop:block">
-          <ul className="flex items-center gap-12">
+          <ul className="flex items-center gap-3">
             {primaryNavigation.map((item) => (
               <li key={item.id}>
                 <a
-                  className="rounded-sm text-xs font-semibold text-ink transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                  className="flex h-9 items-center rounded-pill px-4 text-base font-semibold leading-[30px] text-ink transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                   href={item.href}
                   onClick={handleSectionLink}
                 >
@@ -38,7 +38,7 @@ export function SiteHeader() {
 
         <div className="hidden desktop:block">
           <Button
-            className="min-w-50"
+            className="w-[197px]"
             href={headerCallToAction.href}
             onClick={handleSectionLink}
             size="sm"

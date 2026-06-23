@@ -16,6 +16,7 @@ import emilyAvatar from "../assets/images/testimonials/emily-chen.png";
 import johnAvatar from "../assets/images/testimonials/john-lee.png";
 import sarahAvatar from "../assets/images/testimonials/sarah-tan.png";
 import client02 from "../assets/icons/logos/client-02.svg";
+import client01 from "../assets/icons/logos/client-01.svg";
 import client03 from "../assets/icons/logos/client-03.svg";
 import client04 from "../assets/icons/logos/client-04.svg";
 import client05 from "../assets/icons/logos/client-05.svg";
@@ -25,6 +26,7 @@ import client08 from "../assets/icons/logos/client-08.svg";
 import client09 from "../assets/icons/logos/client-09.svg";
 import type {
   ClientLogo,
+  DisplayMedia,
   FaqItem,
   IndustryItem,
   MediaAsset,
@@ -42,9 +44,18 @@ const image = (
   width: number,
   height: number,
   loading: "eager" | "lazy" = "lazy",
-): MediaAsset => ({ src, alt, width, height, loading });
+  display?: DisplayMedia,
+): MediaAsset => ({
+  src,
+  alt,
+  width,
+  height,
+  loading,
+  ...display,
+});
 
 export const clientLogos = [
+  { id: "logo-1", name: "Client 1", image: image(client01, "Client 1", 133, 48) },
   { id: "upwork", name: "Upwork", image: image(client02, "Upwork", 114, 48) },
   { id: "zoom", name: "Zoom", image: image(client03, "Zoom", 98, 48) },
   {
@@ -182,21 +193,54 @@ export const industries = [
     name: "Fintech",
     description:
       "We build secure, scalable, and compliant fintech solutions — from digital wallets to core banking systems — tailored to modern financial needs.",
-    image: image(fintechImage, "A payment card being used at a terminal", 1200, 1200),
+    image: image(
+      fintechImage,
+      "A payment card being used at a terminal",
+      1200,
+      1200,
+      "lazy",
+      {
+        displayWidth: 840,
+        displayHeight: 351,
+        objectPosition: "50% 50%",
+      },
+    ),
   },
   {
     id: "e-commerce",
     name: "E-Commerce",
     description:
       "We create reliable commerce experiences that help brands sell, operate, and grow across channels.",
-    image: image(fintechImage, "Digital commerce technology", 1200, 1200),
+    image: image(
+      fintechImage,
+      "Digital commerce technology",
+      1200,
+      1200,
+      "lazy",
+      {
+        displayWidth: 840,
+        displayHeight: 351,
+        objectPosition: "50% 50%",
+      },
+    ),
   },
   {
     id: "healtcare",
     name: "Healtcare",
     description:
       "We deliver dependable digital tools that support care teams, operations, and patient experiences.",
-    image: image(fintechImage, "Digital healthcare technology", 1200, 1200),
+    image: image(
+      fintechImage,
+      "Digital healthcare technology",
+      1200,
+      1200,
+      "lazy",
+      {
+        displayWidth: 840,
+        displayHeight: 351,
+        objectPosition: "50% 50%",
+      },
+    ),
   },
 ] as const satisfies readonly IndustryItem[];
 
@@ -229,7 +273,11 @@ export const testimonials = [
     authorName: "John Lee",
     authorRole: "Director",
     company: "Innovate Corp",
-    avatar: image(johnAvatar, "John Lee", 300, 300),
+    avatar: image(johnAvatar, "John Lee", 300, 300, "lazy", {
+      displayWidth: 48,
+      displayHeight: 48,
+      objectPosition: "50% 50%",
+    }),
   },
   {
     id: "sarah-tan",
@@ -238,7 +286,11 @@ export const testimonials = [
     authorName: "Sarah Tan",
     authorRole: "Product Manager",
     company: "Finovate",
-    avatar: image(sarahAvatar, "Sarah Tan", 300, 300),
+    avatar: image(sarahAvatar, "Sarah Tan", 300, 300, "lazy", {
+      displayWidth: 48,
+      displayHeight: 48,
+      objectPosition: "50% 50%",
+    }),
   },
   {
     id: "emily-chen",
@@ -247,7 +299,11 @@ export const testimonials = [
     authorName: "Emily Chen",
     authorRole: "Marketing Head",
     company: "Tech",
-    avatar: image(emilyAvatar, "Emily Chen", 300, 300),
+    avatar: image(emilyAvatar, "Emily Chen", 300, 300, "lazy", {
+      displayWidth: 48,
+      displayHeight: 48,
+      objectPosition: "50% 50%",
+    }),
   },
 ] as const satisfies readonly Testimonial[];
 

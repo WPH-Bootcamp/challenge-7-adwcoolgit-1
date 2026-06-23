@@ -30,7 +30,7 @@ export function MobileNavigation() {
         ref={triggerRef}
         type="button"
       >
-        <img alt="" className="h-4 w-6" src={menuIcon} />
+        <img alt="" className="size-6" src={menuIcon} />
       </button>
       {isOpen ? (
         <nav

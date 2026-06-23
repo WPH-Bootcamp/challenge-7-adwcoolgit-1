@@ -17,32 +17,32 @@ const socialLinks = [
 export function SiteFooter() {
   return (
     <footer
-      className="mx-page mb-6 max-w-300 rounded-xl border border-border bg-surface px-5 py-7 sm:mx-8 sm:px-8 sm:py-10 desktop:mx-auto desktop:mb-20 desktop:px-10 desktop:py-12"
+      className="mx-4 mt-6 h-[528px] max-w-none rounded-footer border border-border bg-surface p-5 desktop:mx-auto desktop:mb-10 desktop:mt-10 desktop:h-[328px] desktop:w-[1160px] desktop:p-10"
       id={sectionIds.footer}
     >
-      <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between sm:gap-8">
-        <p className="max-w-64 text-xl font-bold leading-tight tracking-[-0.02em] sm:text-2xl desktop:text-3xl">
+      <div className="flex h-[124px] flex-col gap-3 desktop:h-auto desktop:flex-row desktop:items-start desktop:justify-between desktop:gap-8">
+        <p className="order-2 w-[281px] max-w-none text-[28px] font-bold leading-[38px] tracking-[-0.02em] desktop:order-1 desktop:text-4xl desktop:leading-[44px] desktop:tracking-[-0.72px]">
           {companyIdentity.footerStatement}
         </p>
         <a
           aria-label={`${companyIdentity.name} home`}
-          className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          className="order-1 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 desktop:order-2"
           href="#hero"
           onClick={handleSectionLink}
         >
-          <BrandLogo />
+          <BrandLogo className="text-ink" />
         </a>
       </div>
 
-      <div className="my-7 h-px bg-border-subtle desktop:my-10" />
+      <div className="my-6 h-px bg-border-subtle desktop:my-[59.5px]" />
 
-      <div className="flex flex-col gap-8 desktop:flex-row desktop:items-center desktop:justify-between">
+      <div className="flex h-[308px] flex-col gap-6 desktop:h-auto desktop:flex-row desktop:items-center desktop:justify-between desktop:gap-8">
         <nav aria-label="Footer">
-          <ul className="flex flex-wrap gap-x-8 gap-y-4">
+          <ul className="flex flex-col gap-y-2 desktop:flex-row desktop:gap-y-0">
             {primaryNavigation.map((item) => (
               <li key={item.id}>
                 <a
-                  className="rounded-sm text-xs font-semibold hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  className="flex h-9 items-center rounded-pill px-0 text-sm font-medium leading-7 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary desktop:px-4 desktop:text-base desktop:leading-[30px]"
                   href={item.href}
                   onClick={handleSectionLink}
                 >
@@ -57,7 +57,7 @@ export function SiteFooter() {
             <li key={social.id}>
               <a
                 aria-label={social.label}
-                className="flex size-9 items-center justify-center rounded-full border border-border bg-canvas transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="flex size-10 items-center justify-center rounded-full border border-border bg-canvas transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 href={social.href}
                 rel="noreferrer"
                 target="_blank"

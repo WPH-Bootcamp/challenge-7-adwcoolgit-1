@@ -41,10 +41,11 @@ export function ContactSection() {
   return (
     <section
       aria-labelledby="contact-heading"
-      className="mx-auto max-w-190 scroll-mt-header-mobile px-page pb-28 sm:px-8 desktop:scroll-mt-header-desktop desktop:pb-40"
+      className="mx-auto h-[946px] w-[calc(100%-32px)] max-w-[361px] scroll-mt-header-mobile px-0 pt-[74px] desktop:h-[956px] desktop:max-w-[720px] desktop:scroll-mt-header-desktop desktop:py-20"
       id={sectionIds.contact}
     >
       <SectionHeading
+        className="!space-y-4"
         headingId="contact-heading"
         subtitle={sectionCopy.contact.subtitle}
         title={sectionCopy.contact.title}
@@ -55,7 +56,7 @@ export function ContactSection() {
         </div>
       ) : (
         <form
-          className="mt-10 space-y-5 desktop:mt-14 desktop:space-y-6"
+          className="mt-6 space-y-5 desktop:mt-12"
           noValidate
           onSubmit={handleSubmit}
           ref={formRef}
@@ -104,7 +105,7 @@ export function ContactSection() {
             aria-invalid={errors.services ? true : undefined}
           >
             <legend className="text-sm font-semibold">Services</legend>
-            <div className="mt-3 grid gap-x-12 desktop:grid-cols-2">
+            <div className="mt-[21px] grid gap-y-3.5 desktop:mt-3 desktop:grid-cols-2 desktop:gap-x-12 desktop:gap-y-4">
               {serviceOptions.map((option) => (
                 <FormField
                   id={`service-${option.id}`}
@@ -130,6 +131,7 @@ export function ContactSection() {
             ) : null}
           </fieldset>
           <Button
+            className="!mt-5 h-11 text-sm leading-7 desktop:!mt-10 desktop:h-12 desktop:text-base desktop:leading-[30px]"
             disabled={status === "submitting"}
             fullWidth
             size="sm"

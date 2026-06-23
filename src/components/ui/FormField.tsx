@@ -3,6 +3,7 @@ import type {
   ReactNode,
   TextareaHTMLAttributes,
 } from "react";
+import checkIcon from "../../assets/icons/ui/check.svg";
 
 interface FieldPresentationProps {
   id: string;
@@ -45,7 +46,7 @@ export type FormFieldProps =
   | CheckboxFieldProps;
 
 const controlClasses =
-  "w-full rounded-sm border border-border bg-canvas px-4 py-3 text-sm text-ink outline-none placeholder:text-muted/75 focus:border-primary focus:ring-2 focus:ring-primary/20 disabled:cursor-not-allowed disabled:bg-surface disabled:opacity-70 aria-invalid:border-primary aria-invalid:ring-1 aria-invalid:ring-primary";
+  "block h-[46px] w-full rounded-sm border border-border bg-canvas px-4 text-sm leading-7 text-ink outline-none placeholder:text-muted/75 focus:border-primary focus:ring-2 focus:ring-primary/20 disabled:cursor-not-allowed disabled:bg-surface disabled:opacity-70 aria-invalid:border-primary aria-invalid:ring-1 aria-invalid:ring-primary";
 
 export function FormField(props: FormFieldProps) {
   const {
@@ -62,20 +63,29 @@ export function FormField(props: FormFieldProps) {
 
   if (props.kind === "checkbox") {
     return (
-      <div className={className}>
+      <div className={className} data-kind="checkbox" data-ui="form-field">
         <label
-          className="inline-flex min-h-11 cursor-pointer items-center gap-3 text-sm font-medium text-ink"
+          className="inline-flex min-h-7 cursor-pointer items-center gap-3 text-sm font-medium leading-7 text-ink desktop:min-h-[30px] desktop:text-base desktop:leading-[30px]"
           htmlFor={id}
         >
-          <input
-            {...props.inputProps}
-            aria-describedby={describedBy || undefined}
-            aria-invalid={error ? true : undefined}
-            className="size-4 rounded-sm border-border accent-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-            id={id}
-            required={required}
-            type="checkbox"
-          />
+          <span className="relative size-5 shrink-0">
+            <input
+              {...props.inputProps}
+              aria-describedby={describedBy || undefined}
+              aria-invalid={error ? true : undefined}
+              className="peer size-5 appearance-none rounded-sm border border-border bg-canvas checked:border-primary checked:bg-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+              data-ui="form-checkbox"
+              id={id}
+              required={required}
+              type="checkbox"
+            />
+            <img
+              alt=""
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-[4px] size-3 opacity-0 peer-checked:opacity-100"
+              src={checkIcon}
+            />
+          </span>
           <span>{label}</span>
         </label>
         <FieldMessages
@@ -89,17 +99,26 @@ export function FormField(props: FormFieldProps) {
   }
 
   return (
-    <div className={["space-y-2", className].filter(Boolean).join(" ")}>
-      <label className="block text-sm font-semibold text-ink" htmlFor={id}>
+    <div
+      className={["space-y-field-gap", className].filter(Boolean).join(" ")}
+      data-kind={props.kind ?? "input"}
+      data-ui="form-field"
+    >
+      <label
+        className="block text-sm font-semibold leading-7 text-ink"
+        data-ui="form-label"
+        htmlFor={id}
+      >
         {label}
-        {required ? <span aria-hidden="true"> *</span> : null}
+        {required ? <span className="sr-only"> (required)</span> : null}
       </label>
       {props.kind === "textarea" ? (
         <textarea
           {...props.textareaProps}
           aria-describedby={describedBy || undefined}
           aria-invalid={error ? true : undefined}
-          className={`${controlClasses} min-h-32 resize-y`}
+          className={`${controlClasses} h-33 min-h-33 resize-y`}
+          data-ui="form-control"
           id={id}
           required={required}
         />
@@ -109,6 +128,7 @@ export function FormField(props: FormFieldProps) {
           aria-describedby={describedBy || undefined}
           aria-invalid={error ? true : undefined}
           className={controlClasses}
+          data-ui="form-control"
           id={id}
           required={required}
         />

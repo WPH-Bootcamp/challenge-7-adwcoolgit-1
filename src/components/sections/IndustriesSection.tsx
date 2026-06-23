@@ -12,7 +12,7 @@ export function IndustriesSection() {
   return (
     <section
       aria-labelledby="industries-heading"
-      className="mx-auto max-w-300 scroll-mt-header-mobile px-page pb-28 sm:px-8 desktop:scroll-mt-header-desktop desktop:px-0 desktop:pb-40"
+      className="mx-auto h-[655px] w-[calc(100%-32px)] max-w-[361px] scroll-mt-header-mobile px-0 pt-[75px] desktop:h-[758px] desktop:max-w-290 desktop:scroll-mt-header-desktop desktop:py-20"
       id={sectionIds.industries}
     >
       <SectionHeading
@@ -21,10 +21,10 @@ export function IndustriesSection() {
         subtitle={sectionCopy.industries.subtitle}
         title={sectionCopy.industries.title}
       />
-      <div className="mt-10 grid gap-6 desktop:mt-14 desktop:grid-cols-[260px_1fr] desktop:gap-10">
+      <div className="mt-6 grid gap-6 desktop:mt-16 desktop:grid-cols-[256px_840px] desktop:gap-16">
         <ul
           aria-label="Industries"
-          className="flex gap-4 overflow-hidden desktop:block desktop:space-y-5"
+          className="block h-[114px] space-y-3 overflow-hidden desktop:h-auto desktop:space-y-2"
           role="tablist"
         >
           {industries.map((industry) => (
@@ -33,7 +33,7 @@ export function IndustriesSection() {
                 aria-selected={industry.id === selectedId}
                 aria-controls="industry-panel"
                 className={[
-                  "min-h-11 shrink-0 border-l-4 pl-2 text-left text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary desktop:pl-3 desktop:text-lg",
+                  "h-[30px] w-full shrink-0 border-l-4 pl-2 text-left text-base font-bold leading-[30px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary desktop:h-12 desktop:pl-3 desktop:text-lg desktop:leading-8",
                   industry.id === selectedId
                     ? "border-primary text-ink"
                     : "border-border text-muted/60 hover:text-ink",
@@ -50,20 +50,24 @@ export function IndustriesSection() {
         </ul>
         <div
           aria-labelledby={`industry-tab-${selectedIndustry.id}`}
+          className="min-w-0"
           id="industry-panel"
           role="tabpanel"
         >
-          <p className="max-w-205 text-sm font-medium leading-6 desktop:text-base desktop:leading-7">
+          <p className="h-[84px] max-w-none text-sm font-medium leading-7 desktop:h-auto desktop:max-w-[840px] desktop:text-base desktop:leading-[30px]">
             {selectedIndustry.description}
           </p>
-          <img
-            alt={selectedIndustry.image.alt}
-            className="mt-5 aspect-[1.45/1] w-full rounded-xl object-cover object-[center_55%] desktop:mt-6 desktop:aspect-[2.35/1]"
-            height={selectedIndustry.image.height}
-            loading="lazy"
-            src={selectedIndustry.image.src}
-            width={selectedIndustry.image.width}
-          />
+          <div className="mt-5 h-[200px] overflow-hidden rounded-xl desktop:h-[351px] desktop:w-[840px]">
+            <img
+              alt={selectedIndustry.image.alt}
+              className="relative -left-5 -top-[101px] size-[401px] max-w-none object-cover desktop:-left-px desktop:-top-[61px] desktop:h-[466px] desktop:w-[842px]"
+              data-ui="industry-image"
+              height={selectedIndustry.image.height}
+              loading="lazy"
+              src={selectedIndustry.image.src}
+              width={selectedIndustry.image.width}
+            />
+          </div>
         </div>
       </div>
     </section>

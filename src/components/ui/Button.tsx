@@ -37,9 +37,9 @@ const variantClasses: Record<ButtonVariant, string> = {
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: "min-h-10 px-4 py-2 text-sm",
-  md: "min-h-11 px-6 py-2.5 text-sm",
-  lg: "min-h-12 px-8 py-3 text-base",
+  sm: "h-11 px-6 text-button",
+  md: "h-12 px-8 text-button",
+  lg: "h-12 px-8 text-body-md",
 };
 
 const getClasses = ({
@@ -49,7 +49,7 @@ const getClasses = ({
   className = "",
 }: ButtonStyleProps) =>
   [
-    "inline-flex items-center justify-center gap-2 rounded-pill font-semibold",
+    "inline-flex items-center justify-center gap-2 rounded-pill font-semibold inset-shadow-button",
     "transition-colors duration-200 motion-reduce:transition-none",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
     "focus-visible:ring-offset-2 focus-visible:ring-offset-canvas",
@@ -82,6 +82,7 @@ export function Button(props: ButtonProps) {
           size,
           variant,
         })}
+        data-ui="button"
         {...anchorProps}
       >
         {children}
@@ -108,6 +109,7 @@ export function Button(props: ButtonProps) {
         size,
         variant,
       })}
+      data-ui="button"
       type={type}
       {...buttonProps}
     >

@@ -22,21 +22,27 @@ export function SectionHeading({
   return (
     <div
       className={[
-        "space-y-3",
+        "space-y-heading-gap",
         align === "center" ? "text-center" : "text-left",
         className,
       ]
         .filter(Boolean)
         .join(" ")}
+      data-align={align}
+      data-ui="section-heading"
     >
       <Heading
-        className="text-2xl font-bold tracking-[-0.02em] text-ink desktop:text-display-lg"
+        className="text-section-mobile font-bold text-ink desktop:text-section-desktop"
+        data-ui="section-heading-title"
         id={headingId}
       >
         {title}
       </Heading>
       {subtitle ? (
-        <p className="text-sm leading-7 text-muted desktop:text-base">
+        <p
+          className="text-subtitle-mobile font-medium text-muted desktop:text-subtitle-desktop"
+          data-ui="section-heading-subtitle"
+        >
           {subtitle}
         </p>
       ) : null}

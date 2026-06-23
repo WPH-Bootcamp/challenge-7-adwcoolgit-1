@@ -1,13 +1,66 @@
 export type ThemeName = "light";
 
 export type MediaLoading = "eager" | "lazy";
+export type VisualMode = "desktop" | "mobile";
+export type FontFamilyName = "Quicksand" | "Outfit" | "Poppins";
+export type FontWeight = 500 | 600 | 700;
+
+export interface VisualReference {
+  fileKey: string;
+  pageNodeId: string;
+  frameNodeId: string;
+  viewportWidth: number;
+  frameHeight: number;
+  theme: ThemeName;
+  exportPath: string;
+  sha256: string;
+}
+
+export interface SpacingBox {
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+}
+
+export interface LayoutMetric {
+  id: string;
+  scope: "global" | string;
+  mode: VisualMode;
+  width?: number;
+  height?: number;
+  x?: number;
+  y?: number;
+  gap?: number;
+  padding?: SpacingBox;
+}
+
+export interface TypographyRole {
+  id: string;
+  fontFamily: FontFamilyName;
+  fontSize: number;
+  lineHeight: number;
+  fontWeight: FontWeight;
+  letterSpacing: number;
+  mode: VisualMode;
+}
+
+export interface DisplayMedia {
+  displayWidth?: number;
+  displayHeight?: number;
+  objectPosition?: string;
+}
 
 export interface MediaAsset {
   src: string;
+  figmaAssetId?: string;
   alt: string;
   width: number;
   height: number;
+  displayWidth?: number;
+  displayHeight?: number;
   objectPosition?: string;
+  displayByMode?: Partial<Record<VisualMode, DisplayMedia>>;
   loading: MediaLoading;
 }
 
@@ -17,6 +70,9 @@ export interface DesignSection {
   headingId: string;
   theme: ThemeName;
   order: number;
+  desktopMetrics: LayoutMetric[];
+  mobileMetrics: LayoutMetric[];
+  headingRole: TypographyRole["id"];
 }
 
 export interface ActionLink {
