@@ -32,7 +32,7 @@ export function SectionHeading({
       data-ui="section-heading"
     >
       <Heading
-        className="text-section-mobile font-bold text-ink desktop:text-section-desktop"
+        className="text-section-mobile font-bold text-ink lg:text-section-desktop"
         data-ui="section-heading-title"
         id={headingId}
       >
@@ -40,7 +40,7 @@ export function SectionHeading({
       </Heading>
       {subtitle ? (
         <p
-          className="text-subtitle-mobile font-medium text-muted desktop:text-subtitle-desktop"
+          className="text-subtitle-mobile font-medium text-muted lg:text-subtitle-desktop"
           data-ui="section-heading-subtitle"
         >
           {subtitle}

@@ -17,16 +17,16 @@ const socialLinks = [
 export function SiteFooter() {
   return (
     <footer
-      className="mx-4 mt-6 h-[528px] max-w-none rounded-footer border border-border bg-surface p-5 desktop:mx-auto desktop:mb-10 desktop:mt-10 desktop:h-[328px] desktop:w-[1160px] desktop:p-10"
+      className="mx-4 mt-6 h-[528px] max-w-none rounded-footer md:mx-auto md:max-w-[720px] lg:max-w-none border border-border bg-surface p-5 lg:mx-auto lg:mb-10 lg:mt-10 lg:h-[328px] lg:w-[1160px] xl:w-[1160px] lg:p-10"
       id={sectionIds.footer}
     >
-      <div className="flex h-[124px] flex-col gap-3 desktop:h-auto desktop:flex-row desktop:items-start desktop:justify-between desktop:gap-8">
-        <p className="order-2 w-[281px] max-w-none text-[28px] font-bold leading-[38px] tracking-[-0.02em] desktop:order-1 desktop:text-4xl desktop:leading-[44px] desktop:tracking-[-0.72px]">
+      <div className="flex h-[124px] flex-col gap-3 lg:h-auto lg:flex-row lg:items-start lg:justify-between lg:gap-8">
+        <p className="order-2 w-[281px] max-w-none text-[28px] font-bold leading-[38px] tracking-[-0.02em] lg:order-1 lg:text-4xl lg:leading-[44px] lg:tracking-[-0.72px]">
           {companyIdentity.footerStatement}
         </p>
         <a
           aria-label={`${companyIdentity.name} home`}
-          className="order-1 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 desktop:order-2"
+          className="order-1 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 lg:order-2"
           href="#hero"
           onClick={handleSectionLink}
         >
@@ -34,15 +34,15 @@ export function SiteFooter() {
         </a>
       </div>
 
-      <div className="my-6 h-px bg-border-subtle desktop:my-[59.5px]" />
+      <div className="my-6 h-px bg-border-subtle lg:my-[59.5px]" />
 
-      <div className="flex h-[308px] flex-col gap-6 desktop:h-auto desktop:flex-row desktop:items-center desktop:justify-between desktop:gap-8">
+      <div className="flex h-[308px] flex-col gap-6 lg:h-auto lg:flex-row lg:items-center lg:justify-between lg:gap-8">
         <nav aria-label="Footer">
-          <ul className="flex flex-col gap-y-2 desktop:flex-row desktop:gap-y-0">
+          <ul className="flex flex-col gap-y-2 lg:flex-row lg:gap-y-0">
             {primaryNavigation.map((item) => (
               <li key={item.id}>
                 <a
-                  className="flex h-9 items-center rounded-pill px-0 text-sm font-medium leading-7 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary desktop:px-4 desktop:text-base desktop:leading-[30px]"
+                  className="flex h-9 items-center rounded-pill px-0 text-sm font-medium leading-7 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary lg:px-4 lg:text-base lg:leading-[30px]"
                   href={item.href}
                   onClick={handleSectionLink}
                 >
