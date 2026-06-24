@@ -51,11 +51,11 @@ export function ContactSection() {
     <section
       aria-labelledby="contact-heading"
       className={[
-        "mx-auto w-[calc(100%-32px)] max-w-[361px] scroll-mt-header-mobile px-0 pt-[74px]",
-        "desktop:max-w-[720px] desktop:scroll-mt-header-desktop desktop:py-20",
+        "mx-auto w-[calc(100%-32px)] max-w-[361px] md:max-w-[720px] scroll-mt-header-mobile px-0 pt-[74px]",
+        "lg:max-w-[720px] xl:max-w-[720px] lg:scroll-mt-header-desktop lg:py-20",
         status === "invalid"
-          ? "min-h-[1040px] desktop:min-h-[1050px]"
-          : "h-[946px] desktop:h-[956px]",
+          ? "min-h-[1040px] lg:min-h-[1050px]"
+          : "h-[946px] lg:h-[956px]",
       ].join(" ")}
       id={sectionIds.contact}
     >
@@ -66,13 +66,13 @@ export function ContactSection() {
         title={sectionCopy.contact.title}
       />
       {status === "success" ? (
-        <div className="mt-10 desktop:mt-14">
+        <div className="mt-10 lg:mt-14">
           <SuccessDialog onReset={handleReset} />
         </div>
       ) : (
         <form
           aria-busy={status === "submitting"}
-          className="mt-6 space-y-5 desktop:mt-12"
+          className="mt-6 space-y-5 lg:mt-12"
           noValidate
           onSubmit={handleSubmit}
           ref={formRef}
@@ -121,7 +121,7 @@ export function ContactSection() {
             aria-invalid={errors.services ? true : undefined}
           >
             <legend className="text-sm font-semibold">Services</legend>
-            <div className="mt-[21px] grid gap-y-3.5 desktop:mt-3 desktop:grid-cols-2 desktop:gap-x-12 desktop:gap-y-4">
+            <div className="mt-[21px] grid gap-y-3.5 lg:mt-3 lg:grid-cols-2 lg:gap-x-12 lg:gap-y-4">
               {serviceOptions.map((option) => (
                 <FormField
                   id={`service-${option.id}`}
@@ -148,7 +148,7 @@ export function ContactSection() {
           </fieldset>
           <Button
             aria-busy={status === "submitting"}
-            className="!mt-5 h-11 text-sm leading-7 desktop:!mt-10 desktop:h-12 desktop:text-base desktop:leading-[30px]"
+            className="!mt-5 h-11 text-sm leading-7 lg:!mt-10 lg:h-12 lg:text-base lg:leading-[30px]"
             disabled={status === "submitting"}
             fullWidth
             size="sm"

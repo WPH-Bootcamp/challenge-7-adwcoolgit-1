@@ -65,7 +65,7 @@ export function FormField(props: FormFieldProps) {
     return (
       <div className={className} data-kind="checkbox" data-ui="form-field">
         <label
-          className="inline-flex min-h-7 cursor-pointer items-center gap-3 text-sm font-medium leading-7 text-ink desktop:min-h-[30px] desktop:text-base desktop:leading-[30px]"
+          className="inline-flex min-h-7 cursor-pointer items-center gap-3 text-sm font-medium leading-7 text-ink lg:min-h-[30px] lg:text-base lg:leading-[30px]"
           htmlFor={id}
         >
           <span className="relative size-5 shrink-0">

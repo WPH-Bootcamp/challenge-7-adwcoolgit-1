@@ -53,7 +53,7 @@ export function MobileNavigation() {
   };
 
   return (
-    <div className="desktop:hidden">
+    <div className="lg:hidden">
       <button
         aria-controls="mobile-navigation-panel"
         aria-expanded={isOpen}

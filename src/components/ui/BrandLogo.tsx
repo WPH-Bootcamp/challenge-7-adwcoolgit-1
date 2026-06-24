@@ -11,17 +11,17 @@ export function BrandLogo({
   size = "responsive",
 }: BrandLogoProps) {
   const wrapperSize = {
-    responsive: "h-8 w-[141px] desktop:h-9 desktop:w-[158.625px]",
+    responsive: "h-8 w-[141px] lg:h-9 lg:w-[158.625px]",
     mobile: "h-8 w-[141px]",
     desktop: "h-9 w-[158.625px]",
   }[size];
   const markSize = {
-    responsive: "h-8 w-[29.167px] desktop:h-9 desktop:w-[32.813px]",
+    responsive: "h-8 w-[29.167px] lg:h-9 lg:w-[32.813px]",
     mobile: "h-8 w-[29.167px]",
     desktop: "h-9 w-[32.813px]",
   }[size];
   const textSize = {
-    responsive: "text-logo-mobile desktop:text-logo-desktop",
+    responsive: "text-logo-mobile lg:text-logo-desktop",
     mobile: "text-logo-mobile",
     desktop: "text-logo-desktop",
   }[size];
@@ -29,7 +29,7 @@ export function BrandLogo({
   return (
     <span
       className={[
-        "inline-flex shrink-0 items-center gap-1.5 text-ink desktop:gap-[7px]",
+        "inline-flex shrink-0 items-center gap-1.5 text-ink lg:gap-[7px]",
         wrapperSize,
         className,
       ]
