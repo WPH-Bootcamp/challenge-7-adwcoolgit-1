@@ -6,9 +6,14 @@ import {
   comparePngs,
   inspectPng,
   sha256File,
+  waitForVisualReadiness,
 } from "./helpers/visualComparison";
 
 const repositoryRoot = path.resolve(import.meta.dirname, "..");
+const comparisonOutputDir = path.resolve(
+  repositoryRoot,
+  "test-results/figma-comparison",
+);
 
 for (const [mode, frame] of Object.entries(figmaManifest.frames)) {
   test(`${mode} Figma reference is native-size and immutable`, async () => {
@@ -47,7 +52,7 @@ test("desktop page matches the native Figma reference", async ({
   const comparison = await comparePngs({
     actual,
     artifactName: "desktop-figma",
-    outputDir: testInfo.outputPath("figma-comparison"),
+    outputDir: comparisonOutputDir,
     referencePath,
   });
 
@@ -68,7 +73,7 @@ test("desktop page matches the native Figma reference", async ({
 test("mobile page matches the native Figma reference", async ({
   browserName,
   page,
-}, testInfo) => {
+}) => {
   test.skip(browserName !== "chromium", "Figma pixel oracle uses Chromium.");
   test.setTimeout(60_000);
   const frame = figmaManifest.frames.mobile;
@@ -82,7 +87,7 @@ test("mobile page matches the native Figma reference", async ({
   const comparison = await comparePngs({
     actual,
     artifactName: "mobile-figma",
-    outputDir: testInfo.outputPath("figma-comparison"),
+    outputDir: comparisonOutputDir,
     referencePath,
   });
 
@@ -90,3 +95,23 @@ test("mobile page matches the native Figma reference", async ({
   expect(comparison.actualHeight).toBe(frame.height);
   expect(comparison.diffPixelRatio).toBeLessThanOrEqual(0.02);
 });
+
+for (const width of [320, 375, 768, 1024] as const) {
+  test(`${width}px approved responsive regression`, async ({
+    browserName,
+    page,
+  }) => {
+    test.skip(browserName !== "chromium", "Responsive goldens use Chromium.");
+    test.setTimeout(60_000);
+    await page.setViewportSize({ width, height: width < 768 ? 852 : 1024 });
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/");
+    await waitForVisualReadiness(page);
+
+    await expect(page).toHaveScreenshot(`company-profile-${width}.png`, {
+      animations: "disabled",
+      fullPage: true,
+      maxDiffPixelRatio: 0.02,
+    });
+  });
+}

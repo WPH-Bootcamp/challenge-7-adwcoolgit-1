@@ -38,7 +38,7 @@ export function IndustriesSection() {
   return (
     <section
       aria-labelledby="industries-heading"
-      className="mx-auto h-[655px] w-[calc(100%-32px)] max-w-[361px] scroll-mt-header-mobile px-0 pt-[75px] desktop:h-[758px] desktop:max-w-290 desktop:scroll-mt-header-desktop desktop:py-20"
+      className="mx-auto h-[655px] w-[calc(100%-32px)] max-w-[361px] md:max-w-[720px] scroll-mt-header-mobile px-0 pt-[75px] lg:h-[758px] lg:max-w-290 xl:max-w-290 lg:scroll-mt-header-desktop lg:py-20"
       id={sectionIds.industries}
     >
       <SectionHeading
@@ -47,10 +47,10 @@ export function IndustriesSection() {
         subtitle={sectionCopy.industries.subtitle}
         title={sectionCopy.industries.title}
       />
-      <div className="mt-6 grid gap-6 desktop:mt-16 desktop:grid-cols-[256px_840px] desktop:gap-16">
+      <div className="mt-6 grid gap-6 lg:mt-16 lg:grid-cols-[256px_840px] lg:gap-16">
         <ul
           aria-label="Industries"
-          className="block h-[114px] space-y-3 overflow-hidden desktop:h-auto desktop:space-y-2"
+          className="block h-[114px] space-y-3 overflow-hidden lg:h-auto lg:space-y-2"
           role="tablist"
         >
           {industries.map((industry, index) => (
@@ -59,7 +59,7 @@ export function IndustriesSection() {
                 aria-selected={industry.id === selectedId}
                 aria-controls="industry-panel"
                 className={[
-                  "h-[30px] w-full shrink-0 border-l-4 pl-2 text-left text-base font-bold leading-[30px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary desktop:h-12 desktop:pl-3 desktop:text-lg desktop:leading-8",
+                  "h-[30px] w-full shrink-0 border-l-4 pl-2 text-left text-base font-bold leading-[30px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary lg:h-12 lg:pl-3 lg:text-lg lg:leading-8",
                   industry.id === selectedId
                     ? "border-primary text-ink"
                     : "border-border text-muted/60 hover:text-ink",
@@ -82,13 +82,13 @@ export function IndustriesSection() {
           id="industry-panel"
           role="tabpanel"
         >
-          <p className="h-[84px] max-w-none text-sm font-medium leading-7 desktop:h-auto desktop:max-w-[840px] desktop:text-base desktop:leading-[30px]">
+          <p className="h-[84px] max-w-none text-sm font-medium leading-7 lg:h-auto lg:max-w-[840px] lg:text-base lg:leading-[30px]">
             {selectedIndustry.description}
           </p>
-          <div className="mt-5 h-[200px] overflow-hidden rounded-xl desktop:h-[351px] desktop:w-[840px]">
+          <div className="mt-5 h-[200px] overflow-hidden rounded-xl lg:h-[351px] lg:w-[840px]">
             <img
               alt={selectedIndustry.image.alt}
-              className="relative -left-5 -top-[101px] size-[401px] max-w-none object-cover desktop:-left-px desktop:-top-[61px] desktop:h-[466px] desktop:w-[842px]"
+              className="relative -left-5 -top-[101px] size-[401px] max-w-none object-cover lg:-left-px lg:-top-[61px] lg:h-[466px] lg:w-[842px]"
               data-ui="industry-image"
               height={selectedIndustry.image.height}
               loading="lazy"

@@ -127,7 +127,9 @@
   --shadow-focus: 0 0 0 4px rgb(255 98 62 / 22%);
   --inset-shadow-button: inset 0 1px 0 rgb(255 255 255 / 28%);
 
-  --breakpoint-desktop: 64rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
 }
 
 @layer base {
