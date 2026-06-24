@@ -12,22 +12,22 @@ export function FaqSection() {
   return (
     <section
       aria-labelledby="faq-heading"
-      className="mx-auto h-[1083.2125px] w-[calc(100%-32px)] max-w-[361px] scroll-mt-header-mobile px-0 pt-[72px] desktop:h-[822px] desktop:max-w-[1200px] desktop:scroll-mt-header-desktop desktop:py-20"
+      className="mx-auto h-[1083.2125px] w-[calc(100%-32px)] max-w-[361px] md:max-w-[720px] scroll-mt-header-mobile px-0 pt-[72px] lg:h-[822px] lg:max-w-[1200px] xl:max-w-[1200px] lg:scroll-mt-header-desktop lg:py-20"
       id={sectionIds.faq}
     >
-      <div className="relative top-0.5 grid h-[82px] gap-4 desktop:static desktop:flex desktop:h-auto desktop:items-end desktop:justify-between desktop:gap-8">
+      <div className="relative top-0.5 grid h-[82px] gap-4 lg:static lg:flex lg:h-auto lg:items-end lg:justify-between lg:gap-8">
         <h2
-          className="max-w-none text-[28px] font-bold leading-[38px] tracking-[-0.02em] desktop:w-[331px] desktop:text-5xl desktop:leading-14 desktop:tracking-[-0.96px]"
+          className="max-w-none text-[28px] font-bold leading-[38px] tracking-[-0.02em] lg:w-[331px] lg:text-[40px] lg:leading-14 lg:tracking-[-0.96px]"
           id="faq-heading"
         >
           {sectionCopy.faq.title}
         </h2>
-        <p className="max-w-none text-sm font-medium leading-7 text-muted desktop:w-[245px] desktop:text-base desktop:leading-8">
+        <p className="max-w-none text- lg:text-[18px] font-medium text-right leading-7 text-muted lg:w-[245px] lg:text-base lg:leading-8">
           {sectionCopy.faq.subtitle}
         </p>
       </div>
-      <div className="mt-6 h-px bg-border desktop:mt-12" />
-      <div className="mt-6 grid gap-6 desktop:mt-12 desktop:grid-cols-[798px_329px] desktop:gap-[73px]">
+      <div className="mt-6 h-px bg-border lg:mt-12" />
+      <div className="mt-6 grid gap-6 lg:mt-12 lg:grid-cols-[798px_329px] lg:gap-[73px]">
         <div className="h-[488px]" data-ui="faq-list">
           {faqs.map((faq, index) => {
             const isOpen = faq.id === openFaqId;
@@ -36,12 +36,12 @@ export function FaqSection() {
               className={[
                 "relative border-0 p-0",
                 isOpen
-                  ? "h-40 desktop:h-[142px]"
+                  ? "h-40 lg:h-[142px]"
                   : index === 1
-                    ? "h-[120px] desktop:h-[92px]"
+                    ? "h-[120px] lg:h-[92px]"
                     : index < faqs.length - 1
-                    ? "h-[88px] desktop:h-[92px]"
-                    : "h-8 desktop:h-9",
+                    ? "h-[88px] lg:h-[92px]"
+                    : "h-8 lg:h-9",
               ].join(" ")}
               key={faq.id}
             >
@@ -49,7 +49,7 @@ export function FaqSection() {
                 <button
                   aria-controls={`faq-panel-${faq.id}`}
                   aria-expanded={isOpen}
-                  className="flex w-full items-center justify-between gap-8 rounded-sm text-left text-base font-bold leading-[30px] transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary desktop:text-xl desktop:leading-[34px]"
+                  className="flex w-full items-center justify-between gap-8 rounded-sm text-left text-base font-bold leading-[30px] transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary lg:text-xl lg:leading-[34px]"
                   onClick={() =>
                     setOpenFaqId((current) =>
                       current === faq.id ? "" : faq.id,
@@ -68,7 +68,7 @@ export function FaqSection() {
               </h3>
               {isOpen ? (
                 <p
-                  className="mt-4 text-sm font-medium leading-7 text-muted desktop:mt-[22px] desktop:text-base desktop:leading-[30px]"
+                  className="mt-4 text-sm font-medium leading-7 text-muted lg:mt-[22px] lg:text-base lg:leading-[30px]"
                   id={`faq-panel-${faq.id}`}
                 >
                   {faq.answer}
@@ -80,10 +80,10 @@ export function FaqSection() {
                   className={[
                     "absolute left-0 block h-px w-full bg-border",
                     isOpen
-                      ? "top-[132px] desktop:top-[114px]"
+                      ? "top-[132px] lg:top-[114px]"
                       : index === 1
-                        ? "top-[92px] desktop:top-16"
-                        : "top-[60px] desktop:top-16",
+                        ? "top-[92px] lg:top-16"
+                        : "top-[60px] lg:top-16",
                   ].join(" ")}
                 />
               ) : null}
@@ -91,10 +91,10 @@ export function FaqSection() {
           )})}
         </div>
         <div
-          className="h-[361.2125px] rounded-xl bg-[#cc4e32] p-5 text-white desktop:h-[453.379px] desktop:w-[329px] desktop:p-6"
+          className="h-[361.2125px] rounded-xl bg-[#cc4e32] p-5 text-white lg:h-[453.379px] lg:w-[329px] lg:p-6"
           data-ui="consultation-card"
         >
-          <h3 className="text-[28px] font-bold leading-[38px] desktop:text-4xl desktop:leading-[44px] desktop:tracking-[-0.72px]">
+          <h3 className="text-[28px] font-bold leading-[38px] lg:text-4xl lg:leading-[44px] lg:tracking-[-0.72px]">
             {sectionCopy.faq.consultationTitle}
           </h3>
           <p className="mt-2 text-sm font-medium leading-7">
@@ -102,14 +102,14 @@ export function FaqSection() {
           </p>
           <img
             alt="A team discussing a project around a conference table"
-            className="mt-[13px] h-[175.2125px] w-full rounded-xl object-cover desktop:mt-5 desktop:h-[153.379px] desktop:w-[281px]"
+            className="mt-[13px] h-[175.2125px] w-full rounded-xl object-cover lg:mt-5 lg:h-[153.379px] lg:w-[281px]"
             height="655"
             loading="lazy"
             src={consultationImage}
             width="1200"
           />
           <Button
-            className="mt-4 desktop:mt-6 desktop:h-12"
+            className="mt-4 lg:mt-6 lg:h-12"
             fullWidth
             href={companyActions.consultation.href}
             onClick={handleSectionLink}

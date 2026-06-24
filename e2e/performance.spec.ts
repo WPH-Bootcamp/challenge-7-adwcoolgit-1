@@ -8,10 +8,16 @@ test("meets loading stability and request quality targets", async ({
 }) => {
   test.skip(browserName !== "chromium", "Web Vitals are verified in Chromium.");
   const failedRequests: string[] = [];
+  const failedResponses: string[] = [];
   const consoleWarnings: string[] = [];
 
   page.on("requestfailed", (request) => {
     failedRequests.push(request.url());
+  });
+  page.on("response", (response) => {
+    if (response.status() >= 400) {
+      failedResponses.push(`${response.status()} ${response.url()}`);
+    }
   });
   page.on("console", (message) => {
     if (message.type() === "warning" || message.type() === "error") {
@@ -57,10 +63,24 @@ test("meets loading stability and request quality targets", async ({
   });
 
   expect(failedRequests).toEqual([]);
+  expect(failedResponses).toEqual([]);
   expect(consoleWarnings).toEqual([]);
   expect(metrics.lcp).toBeGreaterThan(0);
   expect(metrics.lcp).toBeLessThanOrEqual(2_500);
   expect(metrics.cls).toBeLessThanOrEqual(0.1);
+
+  const hero = page.locator('[data-ui="hero-image"] img');
+  await expect(hero).toHaveAttribute("loading", "eager");
+  await expect(hero).toHaveAttribute("fetchpriority", "high");
+
+  const belowFoldImages = page.locator(
+    '#services img[loading], #industries img[loading], #portfolio img[loading], #testimonials img[loading], #faq img[loading]',
+  );
+  const loadingModes = await belowFoldImages.evaluateAll((images) =>
+    images.map((image) => image.getAttribute("loading")),
+  );
+  expect(loadingModes).toHaveLength(17);
+  expect(loadingModes.every((loading) => loading === "lazy")).toBe(true);
 });
 
 test("keeps content usable when images are delayed or unavailable", async ({

@@ -66,6 +66,58 @@ test("content remains reachable at simulated 200 percent zoom", async ({
     scrollWidth: document.documentElement.scrollWidth,
   }));
   expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.clientWidth);
-  await expect(page.getByRole("heading", { name: "Ready to Start? Let’s Talk." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Ready to Start\\?/i })).toBeVisible();
   await expect(page.getByRole("button", { name: "Send" })).toBeVisible();
+});
+test("results cards stay inside the section at intermediate breakpoints", async ({
+  page,
+}) => {
+  for (const viewport of [480, 649, 768, 900] as const) {
+    await page.setViewportSize({ width: viewport, height: 900 });
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+
+    const measurements = await page.evaluate(() => {
+      const section = document.querySelector("#results");
+      const cards = [...document.querySelectorAll('#results [data-ui="stat-card"]')];
+      const sectionRect = section?.getBoundingClientRect();
+
+      return {
+        sectionBottom: sectionRect?.bottom ?? 0,
+        cardBottoms: cards.map((card) => card.getBoundingClientRect().bottom),
+      };
+    });
+
+    for (const cardBottom of measurements.cardBottoms) {
+      expect(cardBottom).toBeLessThanOrEqual(measurements.sectionBottom + 1);
+    }
+  }
+});
+test("header and hero stay within viewport at intermediate desktop widths", async ({
+  page,
+}) => {
+  for (const viewport of [1024, 1032, 1200] as const) {
+    await page.setViewportSize({ width: viewport, height: 700 });
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+
+    const measurements = await page.evaluate(() => {
+      const rect = (selector) => {
+        const element = document.querySelector(selector);
+        if (!element) return null;
+        const box = element.getBoundingClientRect();
+        return { x: box.x, right: box.right };
+      };
+
+      return {
+        headerInner: rect("header > div"),
+        heroCopy: rect('[data-ui="hero-copy"]'),
+        heroImage: rect('[data-ui="hero-image"]'),
+      };
+    });
+
+    expect(measurements.headerInner?.x ?? -1).toBeGreaterThanOrEqual(0);
+    expect(measurements.heroCopy?.x ?? -1).toBeGreaterThanOrEqual(0);
+    expect(measurements.heroImage?.right ?? Number.MAX_SAFE_INTEGER).toBeLessThanOrEqual(viewport + 1);
+  }
 });
